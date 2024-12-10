@@ -6,7 +6,7 @@ wait("0.2")
 ong, ts "8$ paid" script is skidded from bladlock and fearlas. Nigga putted an table
 
 getgenv().lol = {
-        Prediction = 0.09,
+        Prediction = 0,
         Smoothness= 0.0421,
         Button = true,
         AimPart = "UpperTorso",
@@ -251,26 +251,26 @@ getgenv().Settings = {
            ["Vertical"] = 0.05,
         },
         ["AutoPrediction"] = {
-            ["Enabled"] = false,
+            ["Enabled"] = true,
             ["Type"] = "Normal", -- Options: Normal, Custom
-           ["ping20_30"] = 0.12588,
-           ["ping30_40"] = 0.11911,
-           ["ping40_50"] = 0.12471,
-           ["ping50_60"] = 0.13766,
-           ["ping60_70"] = 0.13731,
-           ["ping70_80"] = 0.13951,
-           ["ping80_90"] = 0.14181,
-           ["ping90_100"] = 0.148,
-           ["ping100_110"] = 0.156,
-           ["ping110_120"] = 0.1567,
-           ["ping120_130"] = 0.1601,
-           ["ping130_140"] = 0.1637,
-           ["ping140_150"] = 0.173,
-           ["ping150_160"] = 0.1714,
-           ["ping160_170"] = 0.1863,
-           ["ping170_180"] = 0.1872,
-           ["ping180_190"] = 0.1848,
-           ["ping190_200"] = 0.1865,
+           ["ping20_30"] = 0.10087127181718181,
+           ["ping30_40"] = 0.11027333333333333,
+           ["ping40_50"] = 0.11561500000000001,
+           ["ping50_60"] = 0.12109333333333334,
+           ["ping60_70"] = 0.12670833333333334,
+           ["ping70_80"] = 0.13246,
+           ["ping80_90"] = 0.13834833333333335,
+           ["ping90_100"] = 0.13834833333333335,
+           ["ping100_110"] = 0.14437333333333335,
+           ["ping110_120"] = 0.15053500000000003,
+           ["ping120_130"] = 0.16326833333333332,
+           ["ping130_140"] = 0.17654833333333333,
+           ["ping140_150"] = 0.18339333333333335,
+           ["ping150_160"] = 0.190375,
+           ["ping160_170"] = 0.19749333333333333,
+           ["ping170_180"] = 0.20474833333333334,
+           ["ping180_190"] = 0.21214,
+           ["ping190_200"] = 0.21966833333333335,
         },
         ["Mode"] = "Namecall", -- Options: index, namecall
     },
@@ -286,11 +286,11 @@ getgenv().Settings = {
         ["Enabled"] = true,
         ["AimPart"] = "HumanoidRootPart",
         ["Prediction"] = { 0.1,
-           ["Horizontal"] = 0.185,
-           ["Vertical"] = 0.1,
+           ["Horizontal"] = 0.1345,
+           ["Vertical"] = 0.1409,
         },
         ["Shake"] = {
-            ["X"] = 10,
+            ["X"] = 0,
             ["Y"] = 0,
             ["Z"] = 0, -- Don't touch
         },
@@ -299,7 +299,7 @@ getgenv().Settings = {
         ["NoDelay"] = true,
         ["AutoReload"] = false,
         ["AutoAir"] = {
-            ["Enabled"] = true,
+            ["Enabled"] = false,
             ["Interval"] = 0.5,
         },
         ["CMDS"] = { 
@@ -309,7 +309,7 @@ getgenv().Settings = {
         },
     },
     ["Resolution"] = {
-        ["Value"] = 1,
+        ["Value"] = 3,
     },
     ["Resolvers"] = {  -- Fully customizable
         ["Enabled"] = false,
