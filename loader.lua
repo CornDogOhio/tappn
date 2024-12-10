@@ -1,344 +1,686 @@
-wait("0.2")
---[[
-â–ˆâ–€â–ˆâ€ƒâ–ˆâ–‘â–‘â€ƒâ–ˆâ–‘â–ˆâ€ƒâ–ˆâ–‘â–ˆ
-â–ˆâ–€â–€â€ƒâ–ˆâ–„â–„â€ƒâ–ˆâ–„â–ˆâ€ƒâ–ˆâ–€â–ˆ
+wait("0.2"(
+                -- skid of the month the source is full chatgpt departK
+-- “wannabetapper” a scammer and chagpt user all ur sources are from chatgpt
+-- credits to @hegof. & @idontknowanymorehelpme
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixeluted/adoniscries/main/Source.lua",true))()
 
-ong, ts "8$ paid" script is skidded from bladlock and fearlas. Nigga putted an table
-
-getgenv().lol = {
-        Prediction = 0,
-        Smoothness= 0.0421,
-        Button = true,
-        AimPart = "UpperTorso",
+getgenv().Depart = {
+    ["Aimbot"] = {
+        ["Enabled"] = true,
+        ["Notifications"] = false,
+        ["PINGBASED"] = false,
+        ["PredictionValue"] = 0.143214443,
+        ["Radius"] = 150,
+        ["AirPrediction"] = 0.14633
+    },
+    ["AimbotCamlock"] = {
+        ["Smoothness"] = 0.350,
+        ["AirSmoothness"] = 0.217,
+        ["Campred"] = 0.449,
+        ["ShakeValue"] = 0,
+        ["AimPart"] = "HumanoidRootPart"
+    },
+    ["FOVSettings"] = {
+        ["FOVVisible"] = false,
+        ["FOVSize"] = 150
+    },
+    ["Checks"] = {
+        ["FriendCheck"] = false,
+        ["UnlockOnKO"] = true,
+        ["AntiGroundShots"] = true
+    },
+    ["Visuals"] = {
+        ["Line"] = false,
+        ["Highlight"] = false,
+        ["Emoji"] = false,
+        ["EmojiType"] = "🥵"
+    },
+    ["BulletRedirection"] = { 
+        ["Enabled"] = true,
+        ["HitPart"] = "HumanoidRootPart",
+        ["AirPart"] = "Head",
+        ["Prediction"] = 0.14633,
+        ["AirPrediction"] = 0.129,
+        ["FOV"] = {
+            ["Visible"] = false,
+            ["Size"] = 25
+        },
+        ["Checks"] = {
+            ["WallCheck"] = true,
+            ["FriendCheck"] = false,
+            ["KOCheck"] = true,
+            ["AntiGroundShots"] = true
+        },
+        ["Hitchance"] = {
+            ["Value"] = 100
+        }
+    },
+    ["Triggerbot"] = {
+        ["Enabled"] = false,
+        ["Delay"] = 0.2,
+        ["TapDelay"] = 0.01,
+        ["UsePrediction"] = true,
+        ["Prediction"] = 0.125,
+        ["Tolerance"] = 15,
+        ["Distance"] = 300,
+        ["FOVSize"] = 80,
+        ["FOVShow"] = false,
+        ["Whitelisted"] = {"[Double-Barrel SG]", "[DoubleBarrel]", "[Revolver]", "[TacticalShotgun]"},
+        ["UseWhitelist"] = true, 
+        ["AimParts"] = {"HumanoidRootPart", "Head"},
+        ["WallCheck"] = true,
+        ["KOCheck"] = true
+    },
+    ["Utility"] = {
+        ["Tool"] = false,
+        ["Button"] = true,
+        ["ButtonSize"] = 150,
+        ["Macro"] = true
     }
+}
 
-that doesn't even work ðŸ˜­ðŸ™
-enjoy the horrid source.
+-- credits to chatgpt tapn with the method
+--dont laugh at how gen it is i just used teh method
 
-â–ˆâ–€â–ˆâ€ƒâ–ˆâ–‘â–‘â€ƒâ–ˆâ–‘â–ˆâ€ƒâ–ˆâ–‘â–ˆ
-â–ˆâ–€â–€â€ƒâ–ˆâ–„â–„â€ƒâ–ˆâ–„â–ˆâ€ƒâ–ˆâ–€â–ˆ
-]]--
-loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-Adonis-Anticheat-Bypass-11111"))()
-----------------------------------------------------------------------------------------------------------------------------------------------
-local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 200, 0, 100)
-frame.Position = UDim2.new(0.5, -100, 0.5, -50)
-frame.BackgroundColor3 = Color3.new(1, 1, 1)
-frame.Parent = screenGui
-local title = Instance.new("TextLabel")
-title.Size = UDim2.new(1, 0, 0, 20)
-title.Position = UDim2.new(0, 0, 0, -20)
-title.Text = "Lol.xd CamLock Script"
-title.TextColor3 = Color3.new(1, 1, 1)
-title.BackgroundColor3 = Color3.new(0, 0, 0)
-title.Parent = frame
-----------------------------------------------------------------------------------------------------------------------------------------------
-local dragging
-local dragInput
-local dragStart
-local startPos
+wait(0.5)
+getgenv().Depart = getgenv().Depart
+local plr = game:GetService("Players").LocalPlayer
 
-local function update(input)
-    local delta = input.Position - dragStart
-    frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+
+
+local cclosure = syn_newcclosure or newcclosure or nil
+
+
+
+if not cclosure or not hookmetamethod then
+
+   plr:Kick("\n\nYour exploit doesn't support hookmetamethod\n")
+
 end
 
-title.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragging = true
-        dragStart = input.Position
-        startPos = frame.Position
 
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
+
+local oldNamecall
+
+oldNamecall = hookmetamethod(game, "__namecall", cclosure(function(self,...)
+
+   local NamecallMethod = getnamecallmethod()
+
+   local args = {...}
+
+   
+
+   if (NamecallMethod == "Kick" or NamecallMethod == "kick") and not checkcaller() then
+
+       if self ~= plr then
+
+           return oldNamecall(self,...)
+
+       end
+
+       return
+
+   end
+
+   
+
+   return oldNamecall(self,...)
+
+end))
+        local function playIntro()
+            local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+            local screenGui = Instance.new("ScreenGui")
+            screenGui.Name = "IntroScreen"
+            screenGui.Parent = playerGui
+
+            local frame = Instance.new("Frame")
+            frame.Name = "IntroFrame"
+            frame.Parent = screenGui
+            frame.Size = UDim2.new(1, 0, 1, 0)
+            frame.BackgroundTransparency = 1
+
+            local imageLabel = Instance.new("ImageLabel")
+            imageLabel.Name = "IntroImage"
+            imageLabel.Parent = frame
+            imageLabel.Size = UDim2.new(0.4, 0, 0.4, 0)
+            imageLabel.Position = UDim2.new(0.3, 0, 0.3, 0)
+            imageLabel.Image = "rbxassetid://137104433421526"
+            imageLabel.BackgroundTransparency = 1
+            imageLabel.ImageTransparency = 1
+
+            local sound = Instance.new("Sound")
+            sound.Name = "IntroSound"
+            sound.Parent = frame
+            sound.SoundId = "rbxassetid://7556198569"
+            sound.Volume = 10
+            sound:Play()
+
+            local tweenService = game:GetService("TweenService")
+
+            local blurEffect = Instance.new("BlurEffect")
+            blurEffect.Parent = game.Lighting
+            blurEffect.Size = 24
+
+            local tweenInfo = TweenInfo.new(2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+
+            local fadeIn = tweenService:Create(imageLabel, tweenInfo, {ImageTransparency = 0.5})
+            local fadeOut = tweenService:Create(imageLabel, tweenInfo, {ImageTransparency = 1})
+            local blurTween = tweenService:Create(blurEffect, TweenInfo.new(3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = 0})
+
+            fadeIn:Play()
+            fadeIn.Completed:Wait()
+
+            wait(2)
+
+            fadeOut:Play()
+            fadeOut.Completed:Wait()
+
+            blurTween:Play()
+            blurTween.Completed:Wait()
+
+            blurEffect:Destroy()
+            screenGui:Destroy()
+        end
+
+        playIntro()
+        
+wait(0.5)
+print("Loaded!")
+if Depart.Aimbot.Enabled then
+local CC = game:GetService("Workspace").CurrentCamera
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local placemarker = Instance.new("Part", game.Workspace)
+placemarker.Anchored = true
+placemarker.CanCollide = false
+placemarker.Size = Vector3.new(6, 6, 6)
+placemarker.Transparency = 1
+
+local AimlockState = false
+local Victim = nil
+local Plr
+local function shouldLockOntoPlayer(targetPlayer)
+    -- If FriendCheck is enabled and the target is a friend, do not lock onto the player
+    if Depart.Checks.FriendCheck then
+        -- If FriendCheck is enabled and the target is a friend, return false to avoid locking onto friends
+        if isFriend(targetPlayer) then
+            return false
+        end
+    end
+    -- If FriendCheck is disabled, allow locking onto friends
+    return true
+end
+
+
+local function Notify(text)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification",
+        Text = text,
+        Duration = 2,
+    })
+end
+
+local highlightInstance  -- Variable to hold the highlight instancegg
+
+local function highlightPlayer(targetPlayer)
+    if targetPlayer.Character then
+        local highlight = Instance.new("Highlight")
+        highlight.Parent = targetPlayer.Character
+        highlight.FillColor = Color3.fromRGB(127, 0, 255)  -- Set the highlight color
+        highlight.OutlineColor = Color3.fromRGB(255, 255, 255)  -- Set the outline color
+        highlight.FillTransparency = 0.5  -- Set the transparency
+        highlight.OutlineTransparency = 0.5  -- Set the outline transparency
+        return highlight
+    end
+end
+
+
+
+
+local function lockOntoPlayer(player)
+    Plr = player
+    AimlockState = true
+    if Depart.Aimbot.Notifications then
+        Notify("Locked On: " .. tostring(Plr.Name))
+    end
+
+    -- Apply highlight if Visuals.Highlight is enabled
+    if Depart.Visuals.Highlight and player.Character then
+        highlightInstance = highlightPlayer(player)  -- Call the highlight function
+    end
+
+    -- Create and show emoji if Emoji is enabled
+    if Depart.Visuals.Emoji then
+        if not emojiLabel then
+            createEmoji()  -- Create emoji if it doesn't exist
+        end
+    end
+end
+
+local function unlockPlayer()
+    AimlockState = false
+    Plr = nil
+    
+    if Depart.Aimbot.Notifications then
+        Notify("Unlocked")
+    end
+end
+
+if Depart.Aimbot.PINGBASED then
+    local ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+    ping = tonumber(string.split(ping, '(')[1]) or 0 -- Safe parse
+    
+    if ping < 10 then
+        Depart.Aimbot.PredictionValue = 0.10087127181718181 -- For pings below 10ms
+    elseif ping < 20 then
+        Depart.Aimbot.PredictionValue = 0.10087127181718181 -- Same as original for 10-20ms range
+    elseif ping < 30 then
+        Depart.Aimbot.PredictionValue = 0.11027333333333333 -- Updated for 20-30ms
+    elseif ping < 40 then
+        Depart.Aimbot.PredictionValue = 0.11561500000000001 -- Updated for 30-40ms
+    elseif ping < 50 then
+        Depart.Aimbot.PredictionValue = 0.12109333333333334 -- Updated for 40-50ms
+    elseif ping < 60 then
+        Depart.Aimbot.PredictionValue = 0.12670833333333334 -- Updated for 50-60ms
+    elseif ping < 70 then
+        Depart.Aimbot.PredictionValue = 0.13246 -- Updated for 60-70ms
+    elseif ping < 80 then
+        Depart.Aimbot.PredictionValue = 0.13834833333333335 -- Updated for 70-80ms
+    elseif ping < 90 then
+        Depart.Aimbot.PredictionValue = 0.14437333333333335 -- Updated for 80-90ms
+    elseif ping < 100 then
+        Depart.Aimbot.PredictionValue = 0.15053500000000003 -- Updated for 90-100ms
+    elseif ping < 110 then
+        Depart.Aimbot.PredictionValue = 0.15683333333333335 -- Updated for 100-110ms
+    elseif ping < 120 then
+        Depart.Aimbot.PredictionValue = 0.16326833333333332 -- Updated for 110-120ms
+    elseif ping < 130 then
+        Depart.Aimbot.PredictionValue = 0.16984 -- Updated for 120-130ms
+    elseif ping < 140 then
+        Depart.Aimbot.PredictionValue = 0.17654833333333333 -- Updated for 130-140ms
+    elseif ping < 150 then
+        Depart.Aimbot.PredictionValue = 0.18339333333333335 -- Updated for 140-150ms
+    elseif ping < 160 then
+        Depart.Aimbot.PredictionValue = 0.190375 -- Updated for 150-160ms
+    elseif ping < 170 then
+        Depart.Aimbot.PredictionValue = 0.19749333333333333 -- Updated for 160-170ms
+    elseif ping < 180 then
+        Depart.Aimbot.PredictionValue = 0.20474833333333334 -- Updated for 170-180ms
+    elseif ping < 190 then
+        Depart.Aimbot.PredictionValue = 0.21214 -- Updated for 180-190ms
+    elseif ping < 200 then
+        Depart.Aimbot.PredictionValue = 0.21966833333333335 -- Updated for 190-200ms
+    else
+        Depart.Aimbot.PredictionValue = 0.22733333333333333 -- For pings above 200ms
+    end
+end
+
+
+
+
+local function isFriend(player)
+    return player:IsFriendsWith(game.Players.LocalPlayer.UserId)
+end
+local function unlockIfKOedOrFriend(victim)
+    local koCheck = victim.Character:FindFirstChild("BodyEffects") and victim.Character.BodyEffects:FindFirstChild("K.O")
+    local grabbedCheck = victim.Character:FindFirstChild("GRABBING_CONSTRAINT")
+    
+    -- Check if the target is K.O. or grabbed, and also utilize the shouldLockOntoPlayer check
+    if (koCheck and koCheck.Value) or grabbedCheck or not shouldLockOntoPlayer(victim) then
+        AimlockState = false
+        Victim = nil
+    end
+end
+
+
+
+game:GetService("RunService").Heartbeat:Connect(function()
+    if AimlockState and Victim then
+        unlockIfKOedOrFriend(Victim)
     end
 end)
 
-title.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-        dragInput = input
-    end
-end)
 
-title.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragging = false
-        dragInput = nil
-    end
-end)
 
-game:GetService("UserInputService").InputChanged:Connect(function(input)
-    if input == dragInput and dragging then
-        update(input)
-    end
-end)
-----------------------------------------------------------------------------------------------------------------------------------------------
-local CloseButton = Instance.new("TextButton")
-CloseButton.Size = UDim2.new(0, 20, 0, 20)
-CloseButton.Position = UDim2.new(1, -20, 0, 0)
-CloseButton.Text = "X"
-CloseButton.TextColor3 = Color3.new(1, 1, 1)
-CloseButton.BackgroundColor3 = Color3.new(1, 0, 0)
-CloseButton.Parent = frame
 
-CloseButton.MouseButton1Click:Connect(function()
-    screenGui:Destroy()
-end)
-----------------------------------------------------------------------------------------------------------------------------------------------
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local LocalPlayer = Players.LocalPlayer
-local Mouse = game.Players.LocalPlayer:GetMouse()
-local CamlockState = true
-local Prediction = 0.09
-local HorizontalPrediction = 0.16 -- doesn't matter
-local VerticalPrediction = 0.06 -- doesn't matter
-local XPrediction = 0.176073 -- doesn't matter
-local YPrediction = 0.167092 -- doesn't matter
-local Smoothness = 0.0421
-local Locked = true
-getgenv().Key = "q"
-----------------------------------------------------------------------------------------------------------------------------------------------
-function FindNearestEnemy()
-    local ClosestDistance, ClosestPlayer = math.huge, nil
-    local CenterPosition =
-        Vector2.new(
-        game:GetService("GuiService"):GetScreenResolution().X / 2,
-        game:GetService("GuiService"):GetScreenResolution().Y / 2
-    )
 
-    for _, Player in ipairs(game:GetService("Players"):GetPlayers()) do
-        if Player ~= LocalPlayer then
-            local Character = Player.Character
-            if Character and Character:FindFirstChild("HumanoidRootPart") and Character.Humanoid.Health > 0 then
-                local Position, IsVisibleOnViewport =
-                    game:GetService("Workspace").CurrentCamera:WorldToViewportPoint(Character.HumanoidRootPart.Position)
+local function getClosestPlayerInFOV()
+    local closestPlayer = nil
+    local shortestDistance = Depart.FOVSettings.FOVSize
+    local screenCenter = Vector2.new(CC.ViewportSize.X / 2, CC.ViewportSize.Y / 2)
+    local playerPosition = player.Character and player.Character:FindFirstChild("HumanoidRootPart") and player.Character.HumanoidRootPart.Position
 
-                if IsVisibleOnViewport then
-                    local Distance = (CenterPosition - Vector2.new(Position.X, Position.Y)).Magnitude
-                    if Distance < ClosestDistance then
-                        ClosestPlayer = Character.HumanoidRootPart
-                        ClosestDistance = Distance
+    for _, otherPlayer in pairs(game.Players:GetPlayers()) do
+        if otherPlayer ~= player and otherPlayer.Character and otherPlayer.Character:FindFirstChild("Humanoid") and otherPlayer.Character.Humanoid.Health > 0 then
+            -- Check if the player should be locked onto, considering FriendCheck
+            if shouldLockOntoPlayer(otherPlayer) then
+                local humanoidRootPart = otherPlayer.Character:FindFirstChild("HumanoidRootPart")
+                if humanoidRootPart then
+                    local distance = (humanoidRootPart.Position - playerPosition).magnitude
+                    if distance <= Depart.Aimbot.Radius then
+                        local pos = CC:WorldToViewportPoint(humanoidRootPart.Position)
+                        local fovPos = Vector2.new(pos.X, pos.Y)
+                        local magnitude = (fovPos - screenCenter).magnitude
+                        
+                        if magnitude < Depart.FOVSettings.FOVSize and magnitude < shortestDistance then
+                            closestPlayer = otherPlayer
+                            shortestDistance = magnitude
+                        end
                     end
                 end
             end
         end
     end
-
-    return ClosestPlayer
+    return closestPlayer
 end
-local enemy = nil
-----------------------------------------------------------------------------------------------------------------------------------------------
-RunService.Heartbeat:Connect(function()
-    if CamlockState == true then
-        if enemy then
-            local camera = workspace.CurrentCamera
-            local targetPosition = enemy.Position + enemy.Velocity * Prediction
-            targetPosition = Vector3.new(targetPosition.X + XPrediction, targetPosition.Y + YPrediction, targetPosition.Z)
-            
-            -- Interpolate between the current camera position and the target position
-            local currentPosition = camera.CFrame.Position
-            local newPosition = currentPosition:Lerp(targetPosition, Smoothness)
-            
-            camera.CFrame = CFrame.new(newPosition, targetPosition)
+
+
+-- Create the Drawing line
+local line = Drawing.new("Line")
+line.Thickness = 2 -- Set the thickness of the line
+line.Color = Color3.fromRGB(127, 0, 255) -- Set the color of the line (e.g., red)
+line.Visible = false -- Initially not visible
+line.Transparency = 1 -- Fully transparent initially
+
+
+
+
+local emojiLabel -- Declare the emoji label variable
+
+local function isTargetInAir(character)
+    return character.Humanoid.FloorMaterial == Enum.Material.Air
+end
+
+local function updateAimlockAndMarker()
+    if AimlockState and Victim and Victim.Character then
+        local humanoidRootPart = player.Character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            local aimPart = Depart.AimbotCamlock.AimPart
+            local target = Victim.Character[aimPart]
+
+            -- AntiGroundShots logic
+            if Depart.Checks.AntiGroundShots and Victim.Character then
+                local targetBone = Victim.Character:FindFirstChild(aimPart)
+                if targetBone and targetBone.Velocity.Y < 0 then
+                    targetBone.Velocity = Vector3.new(targetBone.Velocity.X, 0, targetBone.Velocity.Z)
+                    targetBone.AssemblyLinearVelocity = Vector3.new(targetBone.Velocity.X, 0, targetBone.Velocity.Z)
+                end
+            end
+
+            if target then
+                -- Calculate the target's predicted position
+                local targetVelocity = Victim.Character[aimPart].Velocity
+                local predictedPosition = target.Position + (targetVelocity * Depart.Aimbot.PredictionValue)
+
+                -- Use isTargetInAir to adjust prediction when the target is jumping
+                if isTargetInAir(Victim.Character) then
+                    predictedPosition = predictedPosition + (targetVelocity * Depart.Aimbot.AirPrediction)
+                end
+
+                local LookPosition = CFrame.new(CC.CFrame.p, predictedPosition)
+                CC.CFrame = CC.CFrame:Lerp(LookPosition, Depart.AimbotCamlock.Smoothness)
+                placemarker.CFrame = CFrame.new(Victim.Character.HumanoidRootPart.Position)
+
+                -- Update emoji position if enabled
+                if Depart.Visuals.Emoji then
+                    if not emojiLabel then
+                        emojiLabel = Drawing.new("Text")
+                        emojiLabel.Text = Depart.Visuals.EmojiType
+                        emojiLabel.Size = 30
+                        emojiLabel.Color = Color3.fromRGB(255, 255, 255)
+                    end
+                    local targetScreenPos = CC:WorldToViewportPoint(predictedPosition)
+                    emojiLabel.Position = Vector2.new(targetScreenPos.X, targetScreenPos.Y)
+                    emojiLabel.Visible = true
+                end
+
+                -- Calculate the 2D positions for the line drawing
+                local targetScreenPos = CC:WorldToViewportPoint(Victim.Character.HumanoidRootPart.Position)
+                local predictedScreenPos = CC:WorldToViewportPoint(predictedPosition)
+
+                if Depart.Visuals.Line then
+                    line.From = Vector2.new(targetScreenPos.X, targetScreenPos.Y)
+                    line.To = Vector2.new(predictedScreenPos.X, predictedScreenPos.Y)
+                    line.Visible = true
+                end
+            end
+        end
+    else
+        placemarker.CFrame = CFrame.new(0, 9999, 0)
+        line.Visible = false
+
+        if emojiLabel then
+            emojiLabel.Visible = false
+            emojiLabel:Destroy()
+            emojiLabel = nil
+        end
+        if highlightInstance then
+            highlightInstance:Destroy()
+            highlightInstance = nil
         end
     end
-end)
-----------------------------------------------------------------------------------------------------------------------------------------------
-Mouse.KeyDown:Connect(function(k)    
-    if k == getgenv().Key then    
-            Locked = not Locked    
-            if Locked then    
-                enemy = FindNearestEnemy()
-                CamlockState = true
-             else    
-                if enemy ~= nil then    
-                    enemy = nil    
-                    CamlockState = false
-                end    
-            end    
-    end    
-end)
-----------------------------------------------------------------------------------------------------------------------------------------------
-local BladLock = Instance.new("ScreenGui") -- lmao skid
-local Frame = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local Logo = Instance.new("ImageLabel")
-local TextButton = Instance.new("TextButton")
-local UICorner_2 = Instance.new("UICorner")
-----------------------------------------------------------------------------------------------------------------------------------------------
-BladLock.Name = "BlackGuy"
-BladLock.Parent = game.CoreGui
-BladLock.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-Frame.Parent = BladLock
-Frame.BackgroundColor3 = Color3.fromRGB(0, 128, 0)
-Frame.BorderColor3 = Color3.fromRGB(0, 128, 0)
-Frame.BorderSizePixel = 0
-Frame.Position = UDim2.new(0.133798108, 0, 0.20107238, 0)
-Frame.Size = UDim2.new(0, 80, 0, 70)
-Frame.Active = true
-Frame.Draggable = true
-local function TopContainer()
-    Frame.Position = UDim2.new(0.5, -Frame.AbsoluteSize.X / 2, 0, -Frame.AbsoluteSize.Y / 2)
 end
-TopContainer()
-Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(TopContainer)
-UICorner.Parent = Frame
-Logo.Name = "Logo"
-Logo.Parent = Frame
-Logo.BackgroundColor3 = Color3.fromRGB(0, 128, 0)
-Logo.BackgroundTransparency = 5.000
-Logo.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Logo.BorderSizePixel = 0
-Logo.Position = UDim2.new(0.326732665, 0, 0, 0)
-Logo.Size = UDim2.new(0, 30, 0, 60)
-Logo.Image = "rbxassetid://14953137188"
-Logo.ImageTransparency = 117719
-TextButton.Parent = Frame
-TextButton.BackgroundColor3 = Color3.fromRGB(0, 128, 0)
-TextButton.BackgroundTransparency = 5.000
-TextButton.BorderColor3 = Color3.fromRGB(0, 129, 0)
-TextButton.BorderSizePixel = 0
-TextButton.Position = UDim2.new(0.0792079195, 0, 0.18571429, 0)
-TextButton.Size = UDim2.new(0, 70, 0, 50)
-TextButton.Font = Enum.Font.SourceSansSemibold
-TextButton.Text = "Lol.xd CamLock On"
-TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.TextScaled = true
-TextButton.TextSize = 24.000
-TextButton.TextWrapped = true
-local state = true
-TextButton.MouseButton1Click:Connect(
-    function()
-        state = not state
-        if not state then
-            TextButton.Text = "Lol.xd CamLock On"
-            CamlockState = true
-            enemy = FindNearestEnemy()
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Lol.xd Camlock",
-                Text = "Locking To"
-            })
+
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    updateAimlockAndMarker()
+end)
+
+-- Create a Screen GUI for toggle button only if Button is enabled
+if Depart.Utility.Button then
+    local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+    screenGui.ResetOnSpawn = false
+
+    local toggleButton = Instance.new("ImageButton")
+    toggleButton.Parent = screenGui
+    local buttonSize = Depart.Utility.ButtonSize
+    toggleButton.Size = UDim2.new(0, buttonSize, 0, buttonSize) -- Set both width and height to the same value
+    toggleButton.Position = UDim2.new(0.5, -buttonSize / 2, 0.8, -buttonSize / 2) -- Center the button
+    toggleButton.Image = "rbxassetid://137104433421526" -- Replace with the actual image asset ID
+    toggleButton.BackgroundTransparency = 1 -- Set to 1 for a transparent background
+
+
+    local function toggleAimlock()
+        if Depart.Aimbot.Enabled then
+            AimlockState = not AimlockState
+            if AimlockState then
+                Victim = getClosestPlayerInFOV()
+                if Victim then
+                    lockOntoPlayer(Victim)
+                else
+                    unlockPlayer()
+                end
+            else
+                unlockPlayer()
+            end
+        end
+    end
+
+    toggleButton.MouseButton1Click:Connect(toggleAimlock)
+
+    -- Mobile Draggable Functionality
+    local dragging, dragStart, startPos = false, nil, nil
+    toggleButton.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPos = toggleButton.Position
+        end
+    end)
+
+    toggleButton.InputChanged:Connect(function(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement) then
+            local delta = input.Position - dragStart
+            toggleButton.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+    end)
+
+    toggleButton.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = false
+        end
+    end)
+end
+local tool
+if Depart.Utility.Tool then
+    tool = Instance.new("Tool")
+    tool.Name = "LockTool"
+    tool.RequiresHandle = false
+    tool.Parent = player.Backpack
+tool.Activated:Connect(function()
+    if Depart.Aimbot.Enabled then
+        AimlockState = not AimlockState
+        if AimlockState then
+            Victim = getClosestPlayerInFOV()
+            if Victim then
+                lockOntoPlayer(Victim)
+            else
+                unlockPlayer()
+            end
         else
-            TextButton.Text = "Lol.xd CamLock Off"
-            CamlockState = false
-            enemy = nil
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Lol.xd Camlock";
-                Text = "Unlocked";
-                Icon = "rbxassetid://14953137188";
-            })
+            unlockPlayer()
         end
     end
-)
-UICorner_2.Parent = TextButton
-Frame.Active = true
-Frame.Draggable = true
-----------------------------------------------------------------------------------------------------------------------------------------------
-getgenv().Settings = {
-    ["Silent"] = {
-        ["Enabled"] = true,
-        ["AimPart"] = "HumanoidRootPart",
-        ["WallCheck"] = true,
-        ["Visualize"] = false,
-        ["Prediction"] = {
-           ["Horizontal"] = 0.15,
-           ["Vertical"] = 0.05,
-        },
-        ["AutoPrediction"] = {
-            ["Enabled"] = true,
-            ["Type"] = "Normal", -- Options: Normal, Custom
-           ["ping20_30"] = 0.10087127181718181,
-           ["ping30_40"] = 0.11027333333333333,
-           ["ping40_50"] = 0.11561500000000001,
-           ["ping50_60"] = 0.12109333333333334,
-           ["ping60_70"] = 0.12670833333333334,
-           ["ping70_80"] = 0.13246,
-           ["ping80_90"] = 0.13834833333333335,
-           ["ping90_100"] = 0.13834833333333335,
-           ["ping100_110"] = 0.14437333333333335,
-           ["ping110_120"] = 0.15053500000000003,
-           ["ping120_130"] = 0.16326833333333332,
-           ["ping130_140"] = 0.17654833333333333,
-           ["ping140_150"] = 0.18339333333333335,
-           ["ping150_160"] = 0.190375,
-           ["ping160_170"] = 0.19749333333333333,
-           ["ping170_180"] = 0.20474833333333334,
-           ["ping180_190"] = 0.21214,
-           ["ping190_200"] = 0.21966833333333335,
-        },
-        ["Mode"] = "Namecall", -- Options: index, namecall
-    },
-    ["FOV"] = {
-        ["Enabled"] = false,
-        ["Size"] = 35,
-        ["Filled"] = false,
-        ["Thickness"] = 0.66,
-        ["Transparency"] = 0.9,
-        ["Color"] = Color3.fromRGB(0, 255, 0),
-    },
-    ["Camlock"] = { 
-        ["Enabled"] = true,
-        ["AimPart"] = "HumanoidRootPart",
-        ["Prediction"] = { 0.1,
-           ["Horizontal"] = 0.1345,
-           ["Vertical"] = 0.1409,
-        },
-        ["Shake"] = {
-            ["X"] = 0,
-            ["Y"] = 0,
-            ["Z"] = 0, -- Don't touch
-        },
-    },
-    ["Misc"] = {
-        ["NoDelay"] = true,
-        ["AutoReload"] = false,
-        ["AutoAir"] = {
-            ["Enabled"] = false,
-            ["Interval"] = 0.5,
-        },
-        ["CMDS"] = { 
-            ["Enabled"] = false,
-            ["FOVPrefix"] = "B",
-            ["Prediction"] = "A",
-        },
-    },
-    ["Resolution"] = {
-        ["Value"] = 3,
-    },
-    ["Resolvers"] = {  -- Fully customizable
-        ["Enabled"] = false,
-        ["AutoDetect"] = false,
-        ["Type"] = "Recalculator",
-    },
-    ["Visuals"] = {
-        ["Ambient"] = {
-            ["Enabled"] = false,
-            ["Color"] = Color3.fromRGB(0, 255, 0),
-        },
-        ["OutDoor Ambient"] = {
-            ["Enabled"] = false,
-            ["Color"] = Color3.fromRGB(0, 255, 0)
-        },
-        ["Fog Modifications"] = {
-            ["Enabled"] = false,
-            ["Color"] = Color3.fromRGB(0, 255, 0),
-            ["Start"] = 15,
-            ["End"] = 100 
-        },
-        ["ColorCorrection"] = {
-            ["Enabled"] = false,
-            ["Brightness"] = 0,
-            ["Saturation"] = 5,
-            ["Contrast"] = 2,
-        },
-    },
-}
+end)
+end
 
--- // Nigga skidded fearlas ðŸ˜­ðŸ™
-loadstring(game:HttpGet("https://raw.githubusercontent.com/bobbbb-b/B/main/77_SJQ0ZC.lua"))()
+spawn(function()
+    placemarker.Anchored = true
+    placemarker.CanCollide = false
+    placemarker.Size = Vector3.new(6, 6, 6)
+    placemarker.Transparency = 1
+end)
+
+-- Patch to prevent FPS drop
+local mt = getrawmetatable(game)
+local old = mt.__namecall
+setreadonly(mt, false)
+mt.__namecall = newcclosure(function(...)
+    local args = {...}
+    if AimlockState and getnamecallmethod() == "FireServer" then
+        if args[2] == "UpdateMousePos" or args[2] == "MOUSE" or args[2] == "UpdateMousePosI2" or args[2] == "MousePosUpdate" then
+            if Depart.Aimbot.Enabled and Plr and Plr.Character then
+                args[3] = Plr.Character[Depart.AimbotCamlock.AimPart].Position + (Plr.Character[Depart.AimbotCamlock.AimPart].Velocity * Depart.Aimbot.PredictionValue) -- Prediction based on position
+                return old(unpack(args))
+            end
+        end
+    end
+    return old(...)
+end)
+
+-- Clean-up on character removal
+player.CharacterRemoving:Connect(function()
+                                        runService.Heartbeat:Connect(TriggerBot)
+end
+if Depart.Utility.Macro then
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local camera = game.Workspace.CurrentCamera
+    local runService = game:GetService("RunService")
+ 
+    local enabled = false -- Initially set to false
+ 
+    -- Function to update the character's facing direction
+    local function updateCharacterFacing()
+        if enabled and character and character.PrimaryPart then
+            local cameraCFrame = camera.CFrame
+            local lookAtPosition = cameraCFrame.Position + cameraCFrame.LookVector * 100 -- 100 studs ahead of the camera
+            lookAtPosition = Vector3.new(lookAtPosition.x, character.PrimaryPart.Position.y, lookAtPosition.z)
+            character:SetPrimaryPartCFrame(CFrame.new(character.PrimaryPart.Position, lookAtPosition))
+        end
+    end
+ 
+    -- Connect the update function to the RenderStepped event to update every frame
+    runService.RenderStepped:Connect(updateCharacterFacing)
+ 
+    -- Update the character when respawning
+    player.CharacterAdded:Connect(function(newCharacter)
+        character = newCharacter
+        character:WaitForChild("PrimaryPart")
+    end)
+ 
+    local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+    screenGui.Name = "MacroGui"
+    screenGui.Enabled = true -- Show the GUI
+    screenGui.ResetOnSpawn = false -- Ensures the GUI doesn't reset on player respawn
+ 
+    -- Parent Frame (Draggable)
+    local parentFrame = Instance.new("Frame", screenGui)
+    parentFrame.Size = UDim2.new(0, 180, 0, 70) -- Moderate size
+    parentFrame.Position = UDim2.new(0.9, -190, 0.95, -80) -- Adjusted position
+    parentFrame.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+    parentFrame.BorderSizePixel = 0
+ 
+    local uiCornerParent = Instance.new("UICorner", parentFrame)
+    uiCornerParent.CornerRadius = UDim.new(0, 10)
+ 
+    -- Child Frame (Inside Parent)
+    local frame = Instance.new("Frame", parentFrame)
+    frame.Size = UDim2.new(1, -15, 1, -15)
+    frame.Position = UDim2.new(0, 5, 0, 5)
+    frame.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+    frame.BorderSizePixel = 0
+ 
+    local uiCorner = Instance.new("UICorner", frame)
+    uiCorner.CornerRadius = UDim.new(0, 10)
+ 
+    -- Draggable support for the parent frame
+    local function makeDraggable(frame)
+        local dragging
+        local dragInput
+        local dragStart
+        local startPos
+ 
+        local function update(input)
+            local delta = input.Position - dragStart
+            frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+ 
+        frame.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                dragging = true
+                dragStart = input.Position
+                startPos = frame.Position
+ 
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging = false
+                    end
+                end)
+            end
+        end)
+ 
+        frame.InputChanged:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+                dragInput = input
+            end
+        end)
+ 
+        runService.Heartbeat:Connect(function()
+            if dragging and dragInput then
+                update(dragInput)
+            end
+        end)
+    end
+ 
+    makeDraggable(parentFrame)
+ 
+    -- Button
+    local toggleButton = Instance.new("TextButton", frame)
+    toggleButton.Size = UDim2.new(1, 0, 1, 0)
+    toggleButton.Text = "Macro: OFF"
+    toggleButton.BackgroundColor3 = Color3.fromRGB(255, 85, 127)
+    toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggleButton.Font = Enum.Font.SourceSansBold
+    toggleButton.TextScaled = true
+    toggleButton.BorderSizePixel = 0
+ 
+    local buttonCorner = Instance.new("UICorner", toggleButton)
+    buttonCorner.CornerRadius = UDim.new(0, 10)
+    toggleButton.MouseButton1Click:Connect(function()
+        enabled = not enabled
+        toggleButton.Text = enabled and "Macro: ON" or "Macro: OFF"
+        toggleButton.BackgroundColor3 = enabled and Color3.fromRGB(85, 255, 127) or Color3.fromRGB(255, 85, 127)
+    end)
+                                end
