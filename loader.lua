@@ -571,7 +571,301 @@ end)
 
 -- Clean-up on character removal
 player.CharacterRemoving:Connect(function()
-                                        runService.Heartbeat:Connect(TriggerBot)
+    if tool then
+        tool.Parent = player.Backpack
+    end
+end)
+end
+if Depart.BulletRedirection.Enabled then
+-- Define SafePlayers directly in the script
+local SafePlayers = {
+    "NO_HUSTLE", --
+    "atomicccuser433",
+}
+
+-- Existing global variables for Bullet Redirection
+getgenv().HitPart = getgenv().Depart["BulletRedirection"].HitPart
+getgenv().AirPart = getgenv().Depart["BulletRedirection"].AirPart
+getgenv().Prediction_BulletRedirection = getgenv().Depart["BulletRedirection"].Prediction
+getgenv().AirPrediction_BulletRedirection = getgenv().Depart["BulletRedirection"].AirPrediction
+getgenv().BulletRedirectionEnabled = getgenv().Depart["BulletRedirection"].Enabled
+getgenv().BulletRedirectionShowFOV = getgenv().Depart["BulletRedirection"].FOV.Visible
+getgenv().BulletRedirectionFOVSize = getgenv().Depart["BulletRedirection"].FOV.Size
+getgenv().BulletRedirectionHitchance = getgenv().Depart["BulletRedirection"].Hitchance.Value / 100 -- Convert to a fraction
+
+-- Create FOV Drawing for Bullet Redirection
+local FOVCircle = Drawing.new("Circle")
+FOVCircle.Visible = getgenv().BulletRedirectionShowFOV
+FOVCircle.Thickness = 2
+FOVCircle.Color = Color3.fromRGB(0, 255, 0) -- Set stroke color to green
+FOVCircle.NumSides = 100
+FOVCircle.Radius = getgenv().BulletRedirectionFOVSize
+FOVCircle.Position = Vector2.new(0, 0) -- Will be updated later
+FOVCircle.Filled = false
+
+-- Function to update FOV Drawing Position and Visibility
+local function updateFOVCircle()
+    if getgenv().BulletRedirectionShowFOV then
+        FOVCircle.Visible = true
+        FOVCircle.Radius = getgenv().BulletRedirectionFOVSize
+        local centerScreenPosition = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 2, workspace.CurrentCamera.ViewportSize.Y / 2)
+        FOVCircle.Position = centerScreenPosition -- Center it
+    else
+        FOVCircle.Visible = false
+    end
+end
+
+-- Optimize to run FOV update less frequently
+local FOVUpdateInterval = 0.1 -- Update FOV every 0.1 seconds
+game:GetService("RunService").Heartbeat:Connect(function(deltaTime)
+    if FOVUpdateInterval <= 0 then
+        updateFOVCircle()
+        FOVUpdateInterval = 0.1 -- Reset interval
+    else
+        FOVUpdateInterval = FOVUpdateInterval - deltaTime
+    end
+end)
+
+-- Function to check if the player is in the SafePlayers list
+local function isSafePlayer(player)
+    for _, safePlayer in pairs(SafePlayers) do
+        if player.Name == safePlayer then
+            return true
+        end
+    end
+    return false
+end
+
+local function getClosestPlayerToCenter()
+    local centerScreenPosition = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 2, workspace.CurrentCamera.ViewportSize.Y / 2)
+    local closestPlayer
+    local closestDistance = math.huge
+    local localPlayer = game.Players.LocalPlayer
+    local camera = workspace.CurrentCamera
+
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            -- Check if player is safe
+            if isSafePlayer(player) then
+                continue
+            end
+
+            -- FriendCheck: Skip if player is a friend and FriendCheck is enabled
+            if getgenv().Depart["BulletRedirection"].Checks.FriendCheck and localPlayer:IsFriendsWith(player.UserId) then
+                continue
+            end
+
+            local playerRootPart = player.Character.HumanoidRootPart
+            local screenPosition, onScreen = camera:WorldToViewportPoint(playerRootPart.Position)
+
+            if onScreen then
+                -- KOCheck: Skip if the player is knocked out and KOCheck is enabled
+                local KOd = player.Character:FindFirstChild("BodyEffects") and player.Character.BodyEffects["K.O"].Value
+                if getgenv().Depart["BulletRedirection"].Checks.KOCheck and KOd then
+                    continue
+                end
+
+                local Grabbed = player.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
+
+                if not Grabbed then
+                    -- WallCheck: Raycast to ensure no walls are blocking the view
+                    if getgenv().Depart["BulletRedirection"].Checks.WallCheck then
+                        local ray = Ray.new(camera.CFrame.Position, playerRootPart.Position - camera.CFrame.Position)
+                        local part, position = workspace:FindPartOnRay(ray, localPlayer.Character, false, true)
+
+                        if part and not part:IsDescendantOf(player.Character) then
+                            continue
+                        end
+                    end
+
+                    -- AntiGroundShots: Check if player is falling
+                    if getgenv().Depart["BulletRedirection"].Checks.AntiGroundShots then
+                        local yVelocity = playerRootPart.Velocity.Y
+                        if yVelocity < 0 then -- Player is falling
+                            playerRootPart.Velocity = Vector3.new(playerRootPart.Velocity.X, 0, playerRootPart.Velocity.Z) * 0.36
+                        end
+                    end
+
+                    -- Calculate distance to center and update the closest player
+                    local distance = (centerScreenPosition - Vector2.new(screenPosition.X, screenPosition.Y)).Magnitude
+                    if distance < closestDistance and distance <= getgenv().BulletRedirectionFOVSize then
+                        closestPlayer = player
+                        closestDistance = distance
+                    end
+                end
+            end
+        end
+    end
+
+    return closestPlayer
+end
+
+local BulletRedirectionTarget = nil
+
+-- Optimize target finding to run less frequently
+local targetUpdateInterval = 0.2 -- Update target every 0.2 seconds
+game:GetService("RunService").Heartbeat:Connect(function(deltaTime)
+    if targetUpdateInterval <= 0 then
+        BulletRedirectionTarget = getClosestPlayerToCenter()
+        targetUpdateInterval = 0.2 -- Reset interval
+    else
+        targetUpdateInterval = targetUpdateInterval - deltaTime
+    end
+end)
+
+local function isTargetInAir(character)
+    return character.Humanoid.FloorMaterial == Enum.Material.Air
+end
+
+local mt = getrawmetatable(game)
+local old = mt.__namecall
+setreadonly(mt, false)
+mt.__namecall = newcclosure(function(...)
+    local args = {...}
+    if getgenv().BulletRedirectionEnabled and BulletRedirectionTarget ~= nil and BulletRedirectionTarget.Character and getnamecallmethod() == "FireServer" then
+        if args[2] == "UpdateMousePos" or args[2] == "MOUSE" or args[2] == "UpdateMousePosI2" or args[2] == "MousePosUpdate" then
+            local hitchance = math.random() <= getgenv().BulletRedirectionHitchance -- Now uses the fraction
+            if hitchance then
+                local targetPart = isTargetInAir(BulletRedirectionTarget.Character) and getgenv().AirPart or getgenv().HitPart
+                local predictionValue = isTargetInAir(BulletRedirectionTarget.Character) and getgenv().AirPrediction_BulletRedirection or getgenv().Prediction_BulletRedirection
+
+                args[3] = BulletRedirectionTarget.Character[targetPart].Position + (BulletRedirectionTarget.Character[targetPart].Velocity * predictionValue)
+                return old(unpack(args))
+            end
+        end
+    end
+    return old(...)
+end)
+setreadonly(mt, true)
+end
+if Depart.Triggerbot.Enabled then
+local players = game:GetService("Players")
+local runService = game:GetService("RunService")
+local camera = workspace.CurrentCamera
+local client = players.LocalPlayer
+
+local fovCircle = Drawing.new("Circle")
+fovCircle.Thickness = 1
+fovCircle.NumSides = 50
+fovCircle.Radius = getgenv().Depart.Triggerbot.FOVSize
+fovCircle.Color = Color3.fromRGB(255, 0, 0)
+fovCircle.Transparency = 0.5
+fovCircle.Position = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
+fovCircle.Visible = getgenv().Depart.Triggerbot.FOVShow
+
+local function TriggerbotVelocity(target, time)
+    local position = target.Position
+    local velocity = target.Velocity
+    return position + velocity * time
+end
+
+local function PositionTolerance(position, tolerance)
+    local screenPoint = camera:WorldToViewportPoint(position)
+    local screenCenter = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
+    local distanceFromCenter = (Vector2.new(screenPoint.X, screenPoint.Y) - screenCenter).Magnitude
+    return distanceFromCenter <= tolerance
+end
+
+local function IsWithinDistance(player)
+    local character = player.Character
+    if not character then return false end
+
+    local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+    if not humanoidRootPart then return false end
+
+    local clientCharacter = client.Character
+    local clientRootPart = clientCharacter and clientCharacter:FindFirstChild("HumanoidRootPart")
+    if not clientRootPart then return false end
+
+    local distance = (humanoidRootPart.Position - clientRootPart.Position).Magnitude
+    return distance <= getgenv().Depart.Triggerbot.Distance
+end
+
+local function IsInFOV(player)
+    local character = player.Character
+    if not character then return false end
+
+    for _, aimPartName in ipairs(getgenv().Depart.Triggerbot.AimParts) do
+        local aimPart = character:FindFirstChild(aimPartName)
+        if aimPart then
+            local rootPosition = camera:WorldToViewportPoint(aimPart.Position)
+            local screenCenter = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
+
+            if PositionTolerance(aimPart.Position, getgenv().Depart.Triggerbot.FOVSize) then
+                return true
+            end
+        end
+    end
+
+    return false
+end
+
+local function IsWhitelisted(toolName)
+    if not getgenv().Depart.Triggerbot.UseWhitelist then
+        return true
+    end
+    
+    for _, name in ipairs(getgenv().Depart.Triggerbot.Whitelisted) do
+        if toolName == name then
+            return true
+        end
+    end
+    return false
+end
+
+local function WallCheck(target)
+    local origin = camera.CFrame.Position
+    local direction = (target.Position - origin).Unit
+    local raycastParams = RaycastParams.new()
+    raycastParams.FilterDescendantsInstances = {client.Character, target.Parent}
+    raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+    local result = workspace:Raycast(origin, direction * (target.Position - origin).Magnitude, raycastParams)
+    return result == nil
+end
+
+local function KOCheck(player)
+    local KOd = player.Character:FindFirstChild("BodyEffects") and player.Character.BodyEffects["K.O"].Value
+    local Grabbed = player.Character:FindFirstChild("GRABBING_CONSTRAINT") ~= nil
+    return not (KOd or Grabbed)
+end
+
+local function TriggerBot()
+    if getgenv().Depart.Triggerbot.Enabled then
+        local clientCharacter = client.Character
+        if clientCharacter then
+            local tool = clientCharacter:FindFirstChildOfClass("Tool")
+            if tool and IsWhitelisted(tool.Name) then
+                for _, player in ipairs(players:GetPlayers()) do
+                    if player ~= client and IsInFOV(player) and IsWithinDistance(player) then
+                        local character = player.Character
+                        local humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
+
+                        if character and humanoidRootPart and (not getgenv().Depart.Triggerbot.WallCheck or WallCheck(humanoidRootPart)) and (not getgenv().Depart.Triggerbot.KOCheck or KOCheck(player)) then
+                            local predictedPosition = humanoidRootPart.Position
+
+                            if getgenv().Depart.Triggerbot.UsePrediction then
+                                predictedPosition = TriggerbotVelocity(humanoidRootPart, getgenv().Depart.Triggerbot.Prediction)
+                            end
+
+                            if PositionTolerance(predictedPosition, getgenv().Depart.Triggerbot.Tolerance) then
+                                wait(getgenv().Depart.Triggerbot.Delay)
+                                tool:Activate()
+                                wait(getgenv().Depart.Triggerbot.TapDelay)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+runService.RenderStepped:Connect(function()
+    fovCircle.Position = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
+    fovCircle.Visible = getgenv().Depart.Triggerbot.FOVShow
+end)
+
+runService.Heartbeat:Connect(TriggerBot)
 end
 if Depart.Utility.Macro then
     local player = game.Players.LocalPlayer
@@ -683,4 +977,4 @@ if Depart.Utility.Macro then
         toggleButton.Text = enabled and "Macro: ON" or "Macro: OFF"
         toggleButton.BackgroundColor3 = enabled and Color3.fromRGB(85, 255, 127) or Color3.fromRGB(255, 85, 127)
     end)
-                                end
+end
