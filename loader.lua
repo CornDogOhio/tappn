@@ -1,9 +1,4 @@
 wait("0.2")
--- skid of the month the source is full chatgpt departK
--- “wannabetapper” a scammer and chagpt user all ur sources are from chatgpt
--- credits to @hegof. & @idontknowanymorehelpme
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Pixeluted/adoniscries/main/Source.lua",true))()
-
 getgenv().Depart = {
     ["Aimbot"] = {
         ["Enabled"] = true,
