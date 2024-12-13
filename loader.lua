@@ -1,4 +1,14 @@
 wait("0.2")
+local test = loadstring(game:HttpGet("https://raw.githubusercontent.com/NewWhitelistService/function/refs/heads/main/function.lua"))()
+test = test.test
+test({
+    ApiKey = "wp6knKonjY1Uem5eGpS5lAAhgkYMoO",
+    Invalid_Key_Method = "Kick", --//Kick, Notification
+    Key = script_key or "",
+    Script = [[
+        --//u code
+    ]]
+})
 getgenv().Depart = {
     ["Aimbot"] = {
         ["Enabled"] = true,
